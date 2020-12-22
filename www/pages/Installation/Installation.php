@@ -3,8 +3,8 @@
 <head>
     <title>Habbo: Konfiguration</title>
     <link rel="shortcut icon" href="https://images.habbo.com/habbo-web/america/de/assets/images/favicon.08c747be.ico">
-    <link rel="stylesheet" href="./www/thirdparty/bootstrap.min.css">
-    <link rel="stylesheet" href="./www/stylesheet/hh_main.scss">
+    <link rel="stylesheet" href="www/thirdparty/bootstrap.min.css">
+    <link rel="stylesheet" href="www/stylesheet/hh_main.scss">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     kannst. <b>Alle Einstellungen können nach der Installation verändert werden, also keine Sorge!</b>
 
     <?php
-        $controller = new InstallationController();
+        //$controller = new InstallationController();
     ?>
 
     <h3>Kategorie 1: Datenbank Einstellung</h3>

@@ -5,8 +5,9 @@ class Route
 {
 
     protected string $_uri;
+    protected string $_fullUrl;
 
-    public static function instanceRoute()
+    public static function instanceRoute(): Route
     {
         $forceInstallation = false;
 
@@ -23,14 +24,23 @@ class Route
      */
     private function __construct($forceInstallation = false)
     {
+
+
         if ($forceInstallation) {
             return $this->_uri = 'Installation';
         }
+
+        return $this->_uri = $_GET['route'];
     }
 
     public function getUri(): string
     {
         return $this->_uri;
+    }
+
+    public function getFullUrlInformation(): string
+    {
+
     }
 
 

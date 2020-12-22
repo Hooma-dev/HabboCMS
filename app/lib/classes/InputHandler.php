@@ -1,7 +1,7 @@
 <?php
 
 
-class InputHandler extends InstallationController
+class InputHandler
 {
 
     private array $_ruleTemplate = [
