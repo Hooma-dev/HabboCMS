@@ -1,7 +1,8 @@
 <?php
 
+namespace app\lib\controller;
 
-class InstallationController
+class InstallationController extends ControllerInterface
 {
     private string $host;
     private string $user;
@@ -9,9 +10,12 @@ class InstallationController
     private string $port;
     private string $dbname;
 
+    public function __construct() {
 
-    public function createInput(string $inputType = 'text', string $inputName, array $rules = array(), array $attributes = array())
+    }
+
+    public function addInputElement()
     {
-        return $this->addInput($inputType, $inputName, $rules, $attributes);
+        // TODO: Implement addInputElement() method.
     }
 }

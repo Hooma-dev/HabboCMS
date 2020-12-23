@@ -1,5 +1,9 @@
 <?php
 
+namespace app\simpleroute;
+
+
+use app\lib\classes\Install;
 
 class Route
 {

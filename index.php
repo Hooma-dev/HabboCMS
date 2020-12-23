@@ -13,16 +13,11 @@ define('APPPATH', LOCALPATH.'/app');
 define('PAGEPATH', LOCALPATH.'/www/pages');
 define('WWWPATH', LOCALPATH.'/www');
 
-require_once APPPATH . '/simpleroute/Route.php';
-require_once APPPATH . '/simpleroute/View.php';
+spl_autoload_register(function ($class_name) {
+    include LOCALPATH . '/' . $class_name . '.php';
+});
 
-require_once APPPATH . '/lib/classes/Install.php';
+$route = app\simpleroute\Route::instanceRoute();
 
-$route = Route::instanceRoute();
-
-if(file_exists(APPPATH . '/lib/controller/' . $route->getUri() . 'Controller.php')){
-    require_once APPPATH . '/lib/controller/' . $route->getUri() . 'Controller.php';
-}
-
-$view = new View();
+$view = new \app\simpleroute\View();
 $view->callView($route->getUri() . '/' . $route->getUri());

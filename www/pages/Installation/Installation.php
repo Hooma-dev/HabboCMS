@@ -16,7 +16,10 @@
     kannst. <b>Alle Einstellungen können nach der Installation verändert werden, also keine Sorge!</b>
 
     <?php
-        //$controller = new InstallationController();
+
+    use app\lib\controller\InstallationController;
+
+    $controller = new InstallationController();
     ?>
 
     <h3>Kategorie 1: Datenbank Einstellung</h3>
@@ -26,7 +29,7 @@
     <form method="POST">
         <label for="mysql_host">
             Host-Adresse
-            <?php $controller->createInput('text', 'mysql_host') ?>
+
         </label>
         <div class="hh_infoBox">
             <b>Host-Adresse:</b> Die Host-Adresse ist die Verbindungsadresse zu deinem Server. Bitte gebe die
