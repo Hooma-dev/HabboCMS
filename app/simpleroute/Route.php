@@ -7,6 +7,11 @@ class Route
     protected string $_uri;
     protected string $_fullUrl;
 
+    /**
+     * Instantiate Route Class when Install isn't required anymore
+     *
+     * @return Route
+     */
     public static function instanceRoute(): Route
     {
         $forceInstallation = false;
@@ -20,12 +25,11 @@ class Route
 
     /**
      * Route constructor.
+     *
      * @param bool $forceInstallation
      */
     private function __construct($forceInstallation = false)
     {
-
-
         if ($forceInstallation) {
             return $this->_uri = 'Installation';
         }

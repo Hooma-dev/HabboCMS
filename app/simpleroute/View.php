@@ -7,15 +7,30 @@ class View
     private string $_view;
     private string $_fileTemplate = '.php';
 
-    public function callView(string $uri){
-        //$this->_view = $uri[0] . '/' . $uri[1] . $this->_fileTemplate;
+    private string $_folder;
+    private string $_page;
 
+    public function callView(string $uri)
+    {
+        $uri = explode('/', $uri);
 
-        if(!file_exists(PAGEPATH . $this->_view)) {
-            $this->_view = '/404' . $this->_fileTemplate;
+        $this->_folder = $uri[0];
+        $this->_page = $uri[1];
+
+        $uri = null;
+
+        if(self::isViewCallable()){
+            require_once PAGEPATH . '/' . $this->_folder . '/' . $this->_page . $this->_fileTemplate;
+        }
+    }
+
+    private function isViewCallable() : bool
+    {
+        if(file_exists(PAGEPATH . '/' . $this->_folder . '/' . $this->_page . $this->_fileTemplate)){
+            return true;
         }
 
-        require_once PAGEPATH . $this->_view;
+        return false;
     }
 
 }

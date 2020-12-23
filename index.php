@@ -24,5 +24,5 @@ if(file_exists(APPPATH . '/lib/controller/' . $route->getUri() . 'Controller.php
     require_once APPPATH . '/lib/controller/' . $route->getUri() . 'Controller.php';
 }
 
-//$view = new View();
-//$view->callView($route->getUri());
+$view = new View();
+$view->callView($route->getUri() . '/' . $route->getUri());
