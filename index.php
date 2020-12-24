@@ -17,7 +17,14 @@ spl_autoload_register(function ($class_name) {
     include LOCALPATH . '/' . $class_name . '.php';
 });
 
-$route = app\simpleroute\Route::instanceRoute();
+require_once LOCALPATH . '/vendor/autoload.php';
 
-$view = new \app\simpleroute\View();
-$view->callView($route->getUri() . '/' . $route->getUri());
+$route = app\simpleroute\Route::instanceRoute();
+$controllerName = 'app\\lib\\controller\\' . $route->getUri() . 'Controller';
+
+if(class_exists($controllerName)){
+    $controller = new $controllerName;
+}
+
+//$view = new \app\simpleroute\View();
+//$view->callView($route->getUri() . '/' . $route->getUri());
