@@ -16,7 +16,7 @@ class InstallationController extends ControllerInterface
 
     public function __construct()
     {
-        self::render('index.twig', ['testVar' => 'yolo']);
+        self::render('Installation.twig', ['testVar' => 'yolo']);
     }
 
     public function addInputElement()

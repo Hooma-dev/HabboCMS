@@ -1,6 +1,10 @@
 <?php
 
-if(!isset($_GET['route']) || empty($_GET['route'])){
+use app\simpleroute\Route;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+
+if (!isset($_GET['route']) || empty($_GET['route'])) {
     $_GET['route'] = 'index';
 }
 
@@ -9,21 +13,34 @@ $appFolder = $DEFAULTPATH . '/app';
 
 define('CONFIGFILE', 'NewConfig');
 define('LOCALPATH', __DIR__);
-define('APPPATH', LOCALPATH.'/app');
-define('PAGEPATH', LOCALPATH.'/www/pages');
-define('WWWPATH', LOCALPATH.'/www');
+define('APPPATH', LOCALPATH . '/app');
+define('TEMPLATEPATH', LOCALPATH . '/www/template');
+define('WWWPATH', LOCALPATH . '/www');
 
 spl_autoload_register(function ($class_name) {
-    include LOCALPATH . '/' . $class_name . '.php';
+    if (file_exists(LOCALPATH . '/' . $class_name. '.php')) {
+        include LOCALPATH . '/' . $class_name . '.php';
+    }
 });
 
 require_once LOCALPATH . '/vendor/autoload.php';
 
-$route = app\simpleroute\Route::instanceRoute();
-$controllerName = 'app\\lib\\controller\\' . $route->getUri() . 'Controller';
+$route = Route::instanceRoute();
+$controllerName = 'app\\lib\\controller\\' . ucfirst($route->getUri()) . 'Controller';
 
-if(class_exists($controllerName)){
+if (class_exists($controllerName)) {
     $controller = new $controllerName;
+} else {
+    $loader = new FilesystemLoader(WWWPATH . '/template/');
+    $twig = new Environment($loader);
+
+    $page = '404.twig';
+
+    if (file_exists(TEMPLATEPATH . '/' . $route->getUri())) {
+        $page = $route->getUri();
+    }
+
+    echo $twig->render($page);
 }
 
 //$view = new \app\simpleroute\View();
