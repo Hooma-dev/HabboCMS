@@ -9,11 +9,12 @@ use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 
-abstract class ControllerInterface extends InputHandler
+abstract class ControllerInterface
 {
-    abstract protected function addInputElement();
 
-    abstract protected function render(string $name, array $vars = null);
+    private InputHandler $inputHandler;
+
+    abstract protected function render(string $name, array $vars = []);
 
     /**
      * @param string $name
@@ -22,7 +23,7 @@ abstract class ControllerInterface extends InputHandler
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    protected function callTemplate(string $name, array $vars = null): void
+    protected function callTemplate(string $name, array $vars = []): void
     {
         $loader = new FilesystemLoader(WWWPATH . '/template/');
         $twig = new Environment($loader);
@@ -30,4 +31,15 @@ abstract class ControllerInterface extends InputHandler
         echo $twig->render($name, $vars);
     }
 
+    protected function validateInput($data, array $rules = []): bool
+    {
+        $this->inputHandler = InputHandler::instanceInputHandler($this);
+
+        return $this->inputHandler->validateInputData($data, $rules);
+    }
+
+    protected function getErrorMessages(): array
+    {
+        return $this->inputHandler->getErrorMessages();
+    }
 }

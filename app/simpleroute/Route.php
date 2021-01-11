@@ -24,7 +24,7 @@ class Route
             $forceInstallation = true;
         }
 
-        return new Route($forceInstallation);
+        return new Route(false);
     }
 
     /**
@@ -34,12 +34,17 @@ class Route
      */
     private function __construct($forceInstallation = false)
     {
+        $this->_uri = $_GET['route'];
+
         if ($forceInstallation) {
-            return $this->_uri = 'Installation';
+            $this->_uri = 'Installation';
         }
 
-        return $this->_uri = $_GET['route'];
+        $this->_uri = trim($this->_uri, '/');
+
+        return true;
     }
+
 
     public function getUri(): string
     {

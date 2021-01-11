@@ -19,11 +19,6 @@ class InstallationController extends ControllerInterface
         self::render('Installation.twig', ['testVar' => 'yolo']);
     }
 
-    public function addInputElement()
-    {
-        // TODO: Implement addInputElement() method.
-    }
-
     protected function render(string $name, array $vars = null)
     {
         $this->callTemplate($name, $vars);
